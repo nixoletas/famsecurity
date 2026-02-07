@@ -16,7 +16,7 @@ export default function Footer() {
               alt="FAM Security"
               width={120}
               height={57}
-              className="mb-4"
+              className="mb-4 grayscale"
             />
             <p className="text-sm text-muted-foreground leading-relaxed">
               Proteção inteligente para o que importa.
