@@ -1,9 +1,7 @@
-const Gripline = () => {
-    return ( 
-        <svg width="" height="200px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4 10H20M4 14H20" stroke="#008B8B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-</svg>
-     );
+export default function Gripline() {
+  return (
+    <div className="flex justify-center py-8">
+      <div className="h-px w-24 bg-gradient-to-r from-transparent via-border to-transparent" />
+    </div>
+  )
 }
- 
-export default Gripline;

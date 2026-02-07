@@ -1,15 +1,10 @@
 import React from 'react'
 import './globals.css'
-import '../../public/favicon.png'
-import { Inter } from 'next/font/google'
-import Link from 'next/link'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'FAM Security',
-  description: 'Developed by FAM Security',
-  
+  title: 'FAM Security | Proteção Inteligente para seu Patrimônio',
+  description:
+    'Soluções integradas em vigilância, tecnologia e facilities. Segurança sob medida com excelência e inovação.',
 }
 
 export default function RootLayout({
@@ -19,18 +14,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-
-      <link rel="icon" href='/favicon.png' sizes='32x32'></link>
-
-      <link rel="icon" href="/favicon.png" sizes="192x192">
-      </link>
-
-      <body className={inter.className}>
-
-        {children}
-
-
-       </body>
+      <head>
+        <link rel="icon" href="/favicon.png" sizes="32x32" />
+        <link rel="icon" href="/favicon.png" sizes="192x192" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="font-sans">{children}</body>
     </html>
   )
 }
