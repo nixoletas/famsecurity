@@ -1,58 +1,113 @@
-import React from "react";
-import Image from "next/image";
+'use client'
+
+import React from 'react'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { Shield, Cpu, Building2, ArrowRight } from 'lucide-react'
 
 export default function Hero() {
-    return(
-        <>
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
-      
-    <div id='home' className='h-24 overflow-y-hidden'></div>
-    <div className='h-full overflow-y-hidden'>
-    <div className=''>
-      <div className='
-     text-slate-400'>
-        <div className=' mt-2  flex flex-col 
-        items-center text-center overflow-y-hidden'>
-          <h1 className='text-3xl max-sm:text-2xl text-white font-black uppercase'>
-            <span className=''>vigilância</span>,
-            <span className=''> tecnologia </span>
-            <span className=''>e facilities </span><br/>
-          <span className='max-sm:text-2xl text-3xl gradient-light font-bold uppercase'> na palma da sua mão!</span></h1>
-          <p className='text-lg font-bold font-sans  text-gray3 uppercase'>segurança, 
-          parceria e confiança.</p>
-          <div className="p-4">
-            <a href="https://api.whatsapp.com/send?phone=5511989184515">
-          <button className=' shadow-cyan-500/50 flex gap-2 
-        bg-blue-950 font-bold uppercase p-4 rounded-md hover:rounded-xl mt-8 
-         hover:text-2xl text-xl text-green-500 animate-pulse duration-300 ease-in-out dark:drop-shadow-[0_0_0.3rem_#a1f1f9]'>SAIBA MAIS<i className="fa-brands fa-whatsapp text-xl"></i></button></a></div>
-        </div>
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden dot-pattern">
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/80 pointer-events-none" />
 
-        <div id="heroId" className='flex flex-col my-20 mx-1 justify-center items-center text-center'>
-          <div className=' animate-pulse flex flex-row space-x-10 '>
-            <a href="/#vigilant">
-          <Image className='max-sm:w-24  shadow-cyan-500/50   
-          dark:drop-shadow-[0_0_0.3rem_#ffffff] cursor-pointer hover:scale-110 duration-300 ease-in-out'
-          src="/vigilant.svg" alt="My SVG file" width={120} height={120}/>
-          </a>
-
-          <a href="/#technology">
-          <Image className=' max-sm:w-20 
-          dark:drop-shadow-[0_0_0.3rem_#ffffff] cursor-pointer hover:scale-110 duration-300 ease-in-out' 
-          src="/technology.svg" alt="My SVG file" width={120} height={120}/>
-          </a>
-
-          <a href="/#facilities">
-          <Image className='max-sm:w-20 
-          dark:drop-shadow-[0_0_0.3rem_#ffffff] cursor-pointer hover:scale-110 duration-300 ease-in-out' 
-          src="/facilities.svg" alt="My SVG file" width={120} height={120}/>
-          </a>
-
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-white/80 backdrop-blur-sm px-4 py-1.5 text-sm text-muted-foreground mb-8">
+            <Shield size={14} className="text-primary" />
+            Segurança, Parceria e Confiança
           </div>
-        </div>
+        </motion.div>
 
-    </div>
-    </div>
-    </div>
-    </>
-    )
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+          className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight"
+        >
+          Proteção inteligente{' '}
+          <br className="hidden sm:block" />
+          <span className="gradient-text">para o que importa</span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+          className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+        >
+          Vigilância, tecnologia e facilities integrados em uma única solução.
+          Sua segurança projetada com excelência e inovação.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45, ease: 'easeOut' }}
+          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <a
+            href="https://api.whatsapp.com/send?phone=5511989184515"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
+          >
+            Solicite um Orçamento
+            <ArrowRight size={18} />
+          </a>
+          <a
+            href="#servicos"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-6 py-3 text-base font-medium text-foreground hover:bg-accent transition-colors"
+          >
+            Conheça nossos serviços
+          </a>
+        </motion.div>
+
+        {/* Service pillars */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
+          className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto"
+        >
+          {[
+            {
+              icon: Shield,
+              title: 'Vigilância',
+              description: 'Proteção patrimonial com equipes especializadas',
+              href: '#vigilancia',
+            },
+            {
+              icon: Cpu,
+              title: 'Tecnologia',
+              description: 'CFTV, alarmes e portaria digital integrados',
+              href: '#tecnologia',
+            },
+            {
+              icon: Building2,
+              title: 'Facilities',
+              description: 'Serviços de apoio operacional completos',
+              href: '#facilities',
+            },
+          ].map((item, i) => (
+            <a
+              key={item.title}
+              href={item.href}
+              className="group relative flex flex-col items-center gap-3 rounded-xl border border-border bg-white/60 backdrop-blur-sm p-6 hover:bg-white hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                <item.icon size={24} />
+              </div>
+              <h3 className="font-semibold text-foreground">{item.title}</h3>
+              <p className="text-sm text-muted-foreground text-center">
+                {item.description}
+              </p>
+            </a>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
 }

@@ -1,69 +1,146 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Image from "next/image";
+'use client'
+
+import React from 'react'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import { Target, Eye, Users } from 'lucide-react'
+
+function MissionCard({
+  icon: Icon,
+  title,
+  description,
+  imageSrc,
+  index,
+}: {
+  icon: any
+  title: string
+  description: string
+  imageSrc: string
+  index: number
+}) {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.15 }}
+      className="flex flex-col items-center gap-4 rounded-xl border border-border bg-white p-8 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+    >
+      <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <Icon size={32} />
+      </div>
+      <h3 className="text-xl font-bold text-foreground">{title}</h3>
+      <p className="text-sm text-muted-foreground text-center leading-relaxed">
+        {description}
+      </p>
+    </motion.div>
+  )
+}
 
 export default function About() {
-    return (
-        <>
-        <div className='content-container'>
-        <Navbar/>
-        <link as="preloaded" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossOrigin="anonymous" referrerPolicy="no-referrer" /><div className="flex flex-col justify-center items-center">
-    <div className='text-9xl p-6 text-white max-w-screen-lg justify-center text-center'>
-        <div id='about' className=' h-28 justify-center text-center'>
-        </div>
-        <div className="rounded-2xl">
-            <h1 className="p-4 max-sm:text-3xl animate-fade-in-down text-6xl ">
-                Somos a <br></br>
-                <span id="heroId" className="dark:drop-shadow-[0_0_0.3rem_#000000] font-semibold fam-security hero">
-                    FAM Security
-                </span>
+  const { ref: storyRef, inView: storyInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  })
+
+  return (
+    <main className="min-h-screen">
+      <Navbar />
+
+      {/* Hero */}
+      <section className="pt-28 pb-16 dot-pattern relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white pointer-events-none" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-sm font-medium text-primary uppercase tracking-wider mb-3">
+              Quem somos
+            </p>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
+              Somos a{' '}
+              <span className="gradient-text">FAM Security</span>
             </h1>
+          </motion.div>
         </div>
-        <div className='flex flex-col gap-12 font-sans max-md:text-lg p-4 text-2xl text-justify'>
+      </section>
+
+      {/* Story */}
+      <section className="py-16">
+        <motion.div
+          ref={storyRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={storyInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"
+        >
+          <div className="space-y-6 text-base text-muted-foreground leading-relaxed">
             <p>
-                A FAM SECURITY foi fundada no Brasil por um ex-Sargento dos Fuzileiros Navais Americanos “US Marines” com o objetivo de oferecer a seus clientes um lugar único, para atender todas as suas necessidades de segurança.
+              A <strong className="text-foreground">FAM Security</strong> foi fundada
+              no Brasil por um ex-Sargento dos Fuzileiros Navais Americanos (US Marines)
+              com um propósito claro: oferecer aos clientes um ponto único para todas
+              as necessidades de segurança.
             </p>
             <p>
-                Prestamos um serviço de excelência na área de Segurança Patrimonial e Serviços Terceirizados afim de oferecer as melhores soluções com qualidade e melhor custo benefício.
+              Prestamos serviços de excelência em Segurança Patrimonial e Serviços
+              Terceirizados, com foco em qualidade e melhor custo-benefício. Nossa
+              infraestrutura foi projetada para suportar operações complexas por meio
+              da identificação e aconselhamento sobre riscos associados à sua empresa
+              ou equipe.
             </p>
             <p>
-                Possuímos infra estrutura projetada para suportar as operações de nossos clientes por meio da identificação e aconselhamento a respeito dos riscos associados à sua empresa ou seu pessoal. Além de contarmos com uma equipe treinada e qualificada afim de proporcionar mais tranquilidade e satisfação dos nossos clientes.
+              Contamos com profissionais treinados e qualificados para proporcionar
+              tranquilidade e satisfação. Através de análise precisa e experiência
+              consolidada no mercado, desenvolvemos serviços com qualidade e eficiência
+              — visando a melhoria constante das operações e a satisfação total dos
+              nossos clientes.
             </p>
-            <p>
-                Através de uma análise precisa e de nossa experiência no mercado, desenvolvemos nossos serviços qualidade e eficiência. O resultado é a melhoria constante das operações visando a qualidade no atendimento e satisfação dos nossos clientes.
-            </p>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Mission, Vision, Values */}
+      <section className="py-16 bg-muted/30">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+              Nossos Pilares
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <MissionCard
+              icon={Target}
+              title="Missão"
+              description="Ser a melhor e mais completa empresa multisserviços do Brasil, entregando soluções que fazem a diferença no dia a dia dos nossos clientes."
+              imageSrc="/crescimento.png"
+              index={0}
+            />
+            <MissionCard
+              icon={Eye}
+              title="Visão"
+              description="Garantir a sinergia da atividade fim do cliente com apoio contínuo, inovação e tecnologia — permitindo crescimento e perpetuação."
+              imageSrc="/location-1.png"
+              index={1}
+            />
+            <MissionCard
+              icon={Users}
+              title="Valores"
+              description="Equilíbrio entre Pessoas e Negócios com responsabilidade empresarial em nosso DNA, garantindo excelência e eficiência."
+              imageSrc="/group.png"
+              index={2}
+            />
+          </div>
         </div>
+      </section>
 
-    </div>
-
-
-    <div className='max-w-screen-lg mx-4 my-12'>
-        <div id="missao" className="max-md:flex max-md:flex-col select-none gap-6 max-md:gap-y-12 grid grid-cols-3 text-white font-sans justify-center">
-
-            <div id="heroId" className=" px-2 gap-2 hover:scale-105 transition-all flex border-transparent rounded-xl p-12 shadow-black shadow-xl flex-col text-center items-center">
-                <Image width="120" height="120" src="/crescimento.png" alt="" />
-                <h1 className="font-bold text-2xl ">Missão</h1>
-                <p className=" text-base font-FiraCode">Ser a melhor e mais completa empresa multisserviços do Brasil.</p>
-            </div>
-
-            <div id="heroId" className="gap-2 px-2 hover:scale-105 transition-all flex border-transparent rounded-xl p-12 shadow-black shadow-xl flex-col text-center items-center">
-                <Image width="120" height="120" src="/location-1.png" alt="" />
-                <h1 className="font-bold text-2xl">Visão</h1>
-                <p className="text-sm font-FiraCode">Garantir e contribuir com a sinergia da atividade fim do nosso cliente e o seu continuado apoio com viés na inovação e tecnologia, permitindo a sobrevivência, o crescimento e a perpetuação.</p>
-            </div>
-
-            <div id="heroId" className="gap-2 px-2 hover:scale-105 transition-all flex flex-col border-transparent rounded-xl p-12 shadow-black shadow-xl text-center items-center">
-                <Image width="120" height="120" src="/group.png" alt="" />
-                <h1 className="font-bold text-2xl">Valores</h1>
-                <p className=" text-sm font-FiraCode">Equilíbrio entre Pessoas & Negócios com responsabilidade empresarial em nosso DNA, garantindo excelência, qualidade e eficiência em nossos serviços.</p>
-            </div>
-        </div>
-
-    </div>
-</div>
-        <Footer/>
-        </div>
-        </>
-    )
+      <Footer />
+    </main>
+  )
 }

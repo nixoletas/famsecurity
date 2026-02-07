@@ -7,14 +7,12 @@ import Footer from './components/Footer'
 
 export default function Home() {
   return (
-    <>
-    <div className='content-container'>
-      <Navbar/>
-      <Hero/>
+    <main className="min-h-screen">
+      <Navbar />
+      <Hero />
       <Fazemos />
-      <Section/>
+      <Section />
       <Footer />
-    </div>
-    </>
+    </main>
   )
 }

@@ -1,179 +1,194 @@
 'use client'
 
-import Image from "next/image"
-import Gripline from "./Gripline"
-import { useEffect } from "react";
+import Image from 'next/image'
+import { useInView } from 'react-intersection-observer'
+import { motion } from 'framer-motion'
+import { Shield, Camera, Bell, Monitor, Smartphone, DoorOpen, Leaf, Coffee, SprayCan, UserCheck, CarFront, Flame } from 'lucide-react'
 
-export default function Fazemos(){
+function SectionHeader({ title, id }: { title: string; id: string }) {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 })
 
-    useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('FadeAnimate');
-                }
-            })
-        });
-    
-        const hiddenElements = document.querySelectorAll('.Fade');
-        hiddenElements.forEach((el) => observer.observe(el));
-      });
-      
-    return(
-        <div className="h-full text-slate-50 flex mb-24 justify-center text-center">
-            <div className="max-w-screen-lg mx-4 text-center">
-                <h1 className="uppercase max-sm:text-3xl text-6xl font-FiraCode p-4 font-bold pb-56">O que fazemos?</h1>
-                <i className="text-6xl  text-cyan-600 pb-32 animate-bounce fa-solid fa-arrow-down"></i>
-                <div id="vigilant" className="pt-24 font-FiraCode">
-                    <div className="Fade">
-                        <div className="flex flex-col items-center">
-                            <p className="p-4 pb-6  max-sm:text-3xl font-semibold text-6xl">
-                                VIGILÂNCIA
-                            </p>
-                        </div>
+  return (
+    <div id={id} ref={ref} className="scroll-mt-24 mb-12 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5 }}
+      >
+        <h3 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+          {title}
+        </h3>
+        <div className="mt-3 mx-auto h-1 w-16 rounded-full bg-primary/30" />
+      </motion.div>
+    </div>
+  )
+}
 
-                        <div id="textos-vigilancia" className="max-md:grid-cols-1 mt-6 gap-y-12 grid grid-cols-3 gap-2 gap-x-4 select-none">
-                        <div className="flex flex-col items-center gap-y-4 border-transparent hover:scale-105 transition-all shadow-2xl shadow-black border-yellow-400 rounded-lg p-3 text-clip">
-                        <Image width="60" height="60" src="/police-car.webp" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className="font-semibold max-sm:text-lg text-2xl">
-                        Segurança Patrimonial e Escolta Armada
-                        </p>
-                        <p className="px-6 pb-12">Profissionais treinados e qualificados. Atuação preventiva, dentro das condições, prazos e expectativas de nosso Clientes.</p>
-                        </div>
+function ServiceCard({
+  icon: Icon,
+  imageSrc,
+  title,
+  description,
+  index,
+}: {
+  icon?: any
+  imageSrc?: string
+  title: string
+  description: string
+  index: number
+}) {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
 
-                        <div className="flex flex-col gap-y-4 items-center border-transparent shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/vigilancia/consultation.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className=" font-semibold max-sm:text-lg text-2xl">
-                        Consultoria
-                        </p>
-                        <p className="px-6 pb-12 ">Análise de riscos com soluções personalizadas, garantindo um serviço de qualidade e confiança.</p>
-                        </div>
-
-                        <div className="flex flex-col gap-y-4 items-center border-transparent shadow-2xl hover:scale-105 transition-all shadow-black hover:drop-shadow-2xl border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/vigilancia/guarda.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className=" font-semibold max-sm:text-lg text-2xl">
-                        VSPP
-                        </p>
-                        <p className="px-6">Nossos serviços atendem executivos, autoridades e pessoas públicas garantindo segurança e proteção ao longo do dia ou em eventos específicos.</p>
-                        </div>
-                        </div>
-                    </div>
-                    
-                    <div id="technology">
-                    <Gripline/>
-                        <div className="Fade flex flex-col items-center">
-                            <p  className="uppercase p-4 pb-6  max-sm:text-3xl font-semibold text-6xl">
-                                tecnologia
-                            </p>
-                        </div>
-
-                        <div id="textos-tecnologia" className="max-md:grid-cols-1 mt-6 gap-y-12 grid grid-cols-4 gap-2 gap-x-4 select-none">
-                        <div className="flex flex-col items-center gap-y-4 border-transparent shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/tecnologia/security-camera-1.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                    <p className="font-semibold max-sm:text-lg text-2xl">
-                    CFTV
-                    </p>
-                    <p className="px-6 pb-12">As melhores soluções em monitoramento e imagens com equipamentos de ponta e equipes treinadas e capacitadas para tomar decisões de forma rápida e eficiente.</p>
-                    </div>
-
-
-                    <div className="flex flex-col gap-y-4 items-center border-transparent shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                    <Image width="60" height="60" src="/tecnologia/alarme.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                    <p className="font-semibold max-sm:text-lg text-2xl">
-                    Alarmes
-            Monitorados
-                    </p>
-                    <p className="px-6 pb-12 ">Sensores de presença, movimento e múltiplas vias de comunicação.</p>
-                    </div>
-
-                    <div className="flex flex-col gap-y-4 border-transparent items-center shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                    <Image width="60" height="60" src="/tecnologia/interfone.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                    <p className="font-semibold max-sm:text-lg text-2xl">
-                    Portaria Digital
-                    </p>
-                    <p className="px-6 pb-12 ">Controle de pedestres e veículos sem a necessidade de um porteiro no local.</p>
-                    </div>
-
-                    <div className="flex flex-col gap-y-4 border-transparent shadow-2xl items-center hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                    <Image width="60" height="60" src="/tecnologia/digital-1.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                    <p className="font-semibold max-sm:text-lg text-2xl">
-                    Mensageria Digital
-                    </p>
-                    <p className="px-6">Rastreamento de encomendas desde o recebimento até a entrega, avisos automáticos e protocolos armazenados de forma digital e segura.</p>
-                    </div>
-                    </div>
-                    </div>
-
-                    <div id="facilities">
-                    <Gripline/>
-                        <div className="Fade flex flex-col items-center">
-                            <p className="uppercase p-4 pb-6  max-sm:text-3xl font-semibold text-6xl">
-                                facilities
-                            </p>
-                        </div>
-
-                        <div id="textos-facilities" className="max-md:grid-cols-1 mt-6 gap-y-12 grid grid-rows-1 grid-cols-4 gap-2 gap-x-4 select-none">
-                        <div className="flex flex-col gap-y-4 items-center border-transparent shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/facilities/policeman.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className="font-bold max-sm:text-lg text-2xl">
-                        Portaria e Controle de Acesso
-                        </p>
-                        <p className="px-6 pb-12">Possuímos profissionais treinados e capacitados para atuar com controle de catracas, cancelas, portas giratórias, portões internos de entrada e saída de veículos, acesso à elevadores, clausuras dentre outros.</p>
-                        </div>
-
-                        <div className="flex flex-col gap-y-4 border-transparent items-center shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/facilities/farming.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className="font-bold max-sm:text-lg text-2xl">
-                        Jardinagem
-                        </p>
-                        <p className="px-6 pb-12 ">Oferecemos um completo serviço de jardinagem, paisagismo e manutenção de áreas verdes.</p>
-                        </div>
-
-                        <div className="flex flex-col gap-y-4 items-center border-transparent shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/facilities/waitress.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className="font-bold max-sm:text-lg text-2xl">
-                Copeira        </p>
-                        <p className="px-6 pb-12 ">Profissionais qualificados e treinados pra garantir a limpeza de todos os utensílios utilizados, organização da copa, preparo de café, preparo de ambientes para servir, servir em reuniões e individualmente.</p>
-                        </div>
-
-                        <div className="flex flex-col items-center gap-y-4 border-transparent shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/facilities/cleaning.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className="font-bold max-sm:text-lg text-2xl">
-                        Limpeza e
-                Conservação
-                        </p>
-                        <p className="px-6 pb-12 ">Contamos com equipes altamente capacitadas para garantir a discrição, pontualidade e eficiência, munidos de técnicas para manusear os mais modernos equipamentos e produtos de limpeza.</p>
-                        </div>
-                        </div>
-
-                        <div id="textos-facilities" className="max-md:grid-cols-1 mt-6 gap-y-12 grid grid-rows-1 grid-cols-3 gap-2 gap-x-4 select-none">
-                        <div className="flex items-center flex-col gap-y-4 border-transparent shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/facilities/receptionist-1.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className="font-bold max-sm:text-lg text-2xl">
-                        Recepção
-                        </p>
-                        <p className="px-6 pb-12 ">Habilidades técnicas para realizar a identificação, cadastramento e direcionamento de visitantes, triagem de correspondências, prestação de informações para usuários e visitantes, atendimento telefônico e direcionamento de chamadas, sempre com empatia e boa apresentação pessoal.</p>
-                        </div>
-
-                        <div className="flex flex-col gap-y-4 items-center border-transparent shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/facilities/valet.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className="font-bold max-sm:text-lg text-2xl">
-                        Manobrista
-                        </p>
-                        <p className="px-6 pb-12 ">Comodidade e Segurança no Embarque e Desembarque de seus clientes.</p>
-                        </div>
-
-                        <div className="flex flex-col gap-y-4 items-center border-transparent shadow-2xl hover:scale-105 transition-all shadow-black border-yellow-400 rounded-lg p-3">
-                        <Image width="60" height="60" src="/facilities/fireman.png" className="attachment-full size-full" alt="" loading="lazy"/>
-                        <p className="font-bold max-sm:text-lg text-2xl">
-                        Bombeiro Civil
-                        </p>
-                        <p className="px-6 pb-12 ">Bombeiros aptos e capacitados para atender as exigências que possam surgir no dia-a-dia, sempre com precisão, agilidade e o cuidado que a profissão exige.</p>
-                        </div>
-                        </div>
-                        </div>
-                </div>
-            </div>
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="group flex flex-col items-center gap-4 rounded-xl border border-border bg-white p-6 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1"
+    >
+      {imageSrc ? (
+        <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-primary/5">
+          <Image
+            width={40}
+            height={40}
+            src={imageSrc}
+            alt={title}
+            loading="lazy"
+          />
         </div>
-    )
+      ) : Icon ? (
+        <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+          <Icon size={28} />
+        </div>
+      ) : null}
+      <h4 className="font-semibold text-lg text-foreground text-center">{title}</h4>
+      <p className="text-sm text-muted-foreground text-center leading-relaxed">
+        {description}
+      </p>
+    </motion.div>
+  )
+}
+
+export default function Fazemos() {
+  return (
+    <section id="servicos" className="py-24 scroll-mt-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section intro */}
+        <div className="text-center mb-20">
+          <p className="text-sm font-medium text-primary uppercase tracking-wider mb-3">
+            Nossos Serviços
+          </p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight">
+            O que fazemos?
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+            Soluções completas para proteger, monitorar e manter seu patrimônio
+            com profissionais treinados e tecnologia de ponta.
+          </p>
+        </div>
+
+        {/* Vigilância */}
+        <SectionHeader title="Vigilância" id="vigilancia" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+          <ServiceCard
+            imageSrc="/police-car.webp"
+            title="Segurança Patrimonial e Escolta Armada"
+            description="Equipes treinadas e qualificadas com atuação preventiva, cumprindo prazos e superando expectativas dos nossos clientes."
+            index={0}
+          />
+          <ServiceCard
+            imageSrc="/vigilancia/consultation.png"
+            title="Consultoria em Segurança"
+            description="Análise de riscos personalizada com soluções sob medida, garantindo proteção eficiente e custo-benefício otimizado."
+            index={1}
+          />
+          <ServiceCard
+            imageSrc="/vigilancia/guarda.png"
+            title="VSPP"
+            description="Segurança pessoal para executivos, autoridades e personalidades — proteção contínua ou para eventos específicos."
+            index={2}
+          />
+        </div>
+
+        {/* Tecnologia */}
+        <SectionHeader title="Tecnologia" id="tecnologia" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          <ServiceCard
+            imageSrc="/tecnologia/security-camera-1.png"
+            title="CFTV"
+            description="Monitoramento com equipamentos de última geração e equipes capacitadas para respostas rápidas e precisas."
+            index={0}
+          />
+          <ServiceCard
+            imageSrc="/tecnologia/alarme.png"
+            title="Alarmes Monitorados"
+            description="Sensores de presença, movimento e múltiplas vias de comunicação para proteção 24 horas."
+            index={1}
+          />
+          <ServiceCard
+            imageSrc="/tecnologia/interfone.png"
+            title="Portaria Digital"
+            description="Controle inteligente de pedestres e veículos sem necessidade de porteiro presencial."
+            index={2}
+          />
+          <ServiceCard
+            imageSrc="/tecnologia/digital-1.png"
+            title="Mensageria Digital"
+            description="Rastreamento de encomendas com avisos automáticos e protocolos digitais seguros do recebimento à entrega."
+            index={3}
+          />
+        </div>
+
+        {/* Facilities */}
+        <SectionHeader title="Facilities" id="facilities" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <ServiceCard
+            imageSrc="/facilities/policeman.png"
+            title="Portaria e Controle de Acesso"
+            description="Profissionais capacitados para operar catracas, cancelas, portas giratórias e controles de acesso com eficiência."
+            index={0}
+          />
+          <ServiceCard
+            imageSrc="/facilities/farming.png"
+            title="Jardinagem"
+            description="Serviço completo de jardinagem, paisagismo e manutenção de áreas verdes."
+            index={1}
+          />
+          <ServiceCard
+            imageSrc="/facilities/waitress.png"
+            title="Copeira"
+            description="Profissionais qualificados para organização de copa, preparo de ambientes e atendimento em reuniões."
+            index={2}
+          />
+          <ServiceCard
+            imageSrc="/facilities/cleaning.png"
+            title="Limpeza e Conservação"
+            description="Equipes capacitadas com técnicas e equipamentos modernos para limpeza com discrição e eficiência."
+            index={3}
+          />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ServiceCard
+            imageSrc="/facilities/receptionist-1.png"
+            title="Recepção"
+            description="Identificação, cadastramento e direcionamento de visitantes com empatia e profissionalismo."
+            index={4}
+          />
+          <ServiceCard
+            imageSrc="/facilities/valet.png"
+            title="Manobrista"
+            description="Comodidade e segurança no embarque e desembarque com agilidade e cuidado."
+            index={5}
+          />
+          <ServiceCard
+            imageSrc="/facilities/fireman.png"
+            title="Bombeiro Civil"
+            description="Bombeiros capacitados para atender emergências com precisão, agilidade e o cuidado que a profissão exige."
+            index={6}
+          />
+        </div>
+      </div>
+    </section>
+  )
 }
