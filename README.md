@@ -1,28 +1,48 @@
-# Fam Security Landing Page
+<p align="center">
+  <img src="public/logo-fam.png" alt="FAM Security" width="280" />
+</p>
 
-This is my first Next project ever! I tried creating a Landing Page for my father's company FAM SECURITY.
+<h3 align="center">FAM Security — Proteção Inteligente para seu Patrimônio</h3>
 
-First, run the development server:
+<p align="center">
+  <a href="https://famsecurity.vercel.app/">famsecurity.vercel.app</a>
+</p>
+
+---
+
+## Como rodar
 
 ```bash
+# Instalar dependências
+npm install
+
+# Desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
-## Features
+Para build de produção:
 
-- Scroll animation
-- SSR
+```bash
+npm run build
+npm start
+```
 
-## DEMO
+---
 
-Preview: (https://taupe-pasca-66655c.netlify.app)
+## Ferramentas
 
-## Video Demo
-https://github.com/nixoletas/fam-security-landing-page/assets/66659340/05c8852d-1bc1-4ed4-8c64-6a2227f820b8
+| Stack        | Tecnologias |
+| ------------ | ----------- |
+| **Framework** | [Next.js](https://nextjs.org/) 15, [React](https://react.dev/) 19 |
+| **Linguagem** | [TypeScript](https://www.typescriptlang.org/) |
+| **Estilo**   | [Tailwind CSS](https://tailwindcss.com/) |
+| **Animações** | [Framer Motion](https://www.framer.com/motion/) |
+| **UI**       | [Radix UI](https://www.radix-ui.com/), [Lucide Icons](https://lucide.dev/) |
 
+---
+
+<p align="center">
+  <sub>© FAM Security</sub>
+</p>
