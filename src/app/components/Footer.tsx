@@ -63,12 +63,14 @@ export default function Footer() {
             <h4 className="font-semibold text-foreground mb-4">Contato</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <a href="https://maps.app.goo.gl/6LhAKPH9HvRS5yB86" target="_blank" rel="noopener noreferrer">
                 <MapPin size={14} className="mt-0.5 flex-shrink-0 text-primary" />
-                <span>
-                  Alameda Afonso Schmidt, 508 — Santa Terezinha
-                  <br />
-                  São Paulo/SP — CEP 02450-001
-                </span>
+                  <span>
+                    Alameda Afonso Schmidt, 508 — Santa Terezinha
+                    <br />
+                    São Paulo/SP — CEP 02450-001
+                  </span>
+                </a>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Phone size={14} className="flex-shrink-0 text-primary" />

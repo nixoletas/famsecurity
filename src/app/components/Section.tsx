@@ -11,28 +11,28 @@ const values = [
     subtitle: 'Foco total na sua operação',
     description:
       'Asseguramos que sua atividade principal nunca pare. Nosso compromisso é manter tudo funcionando enquanto cuidamos da sua segurança.',
-    stars: 1,
+    stars: 5,
   },
   {
     title: 'Soluções sob medida',
     subtitle: 'Sua opinião é o ponto de partida',
     description:
       'Ouvimos, analisamos e construímos a melhor solução para o seu cenário. Cada projeto é único porque cada cliente é único.',
-    stars: 2,
+    stars: 5,
   },
   {
     title: 'Confiança como base',
     subtitle: 'Relações que geram valor',
     description:
       'Construímos parcerias de longo prazo baseadas em transparência, resultados e respeito mútuo.',
-    stars: 3,
+    stars: 5,
   },
   {
     title: 'Versatilidade operacional',
     subtitle: 'Adaptamos a missão ao desafio',
     description:
       'Independente da complexidade, nossa equipe se adapta com agilidade e competência para entregar resultados.',
-    stars: 4,
+    stars: 5,
   },
   {
     title: 'Presença permanente',

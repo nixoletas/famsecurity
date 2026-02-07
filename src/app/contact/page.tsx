@@ -6,6 +6,9 @@ import Footer from '../components/Footer'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Send, CheckCircle2, Copy, Check } from 'lucide-react'
 
+const MESSAGE_MAX_LENGTH = 500
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 export default function Contact() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -13,18 +16,46 @@ export default function Contact() {
   const [isCopied, setIsCopied] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [formError, setFormError] = useState('')
+  const [fieldErrors, setFieldErrors] = useState<{
+    name?: string
+    email?: string
+    message?: string
+  }>({})
+
+  const validate = () => {
+    const errors: typeof fieldErrors = {}
+    const trimmedName = name.trim()
+    const trimmedEmail = email.trim()
+
+    if (!trimmedName) {
+      errors.name = 'Nome é obrigatório.'
+    }
+    if (!trimmedEmail) {
+      errors.email = 'E-mail é obrigatório.'
+    } else if (!EMAIL_REGEX.test(trimmedEmail)) {
+      errors.email = 'Informe um e-mail válido.'
+    }
+    if (message.length > MESSAGE_MAX_LENGTH) {
+      errors.message = `Mensagem deve ter no máximo ${MESSAGE_MAX_LENGTH} caracteres.`
+    }
+
+    setFieldErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setFormError('')
+    if (!validate()) return
 
     try {
       const formData = new FormData()
-      formData.append('entry.1563745019', name)
-      formData.append('entry.606401615', email)
-      formData.append('entry.2077698595', message)
+      formData.append('entry.880865109', name)
+      formData.append('entry.255463999', email)
+      formData.append('entry.1676664265', message)
 
       await fetch(
-        'https://docs.google.com/forms/d/e/1FAIpQLSdENtwEoOcqQYe2Ip5joDJlwZN-_HbU_QGsoSagg2kw3SXJRg/formResponse',
+        'https://docs.google.com/forms/d/e/1FAIpQLScHdGEG6c6oxUvGcqqLPyZ8XVCc_R744hOVNWw2JCxQhdRtOg/formResponse',
         {
           method: 'POST',
           body: formData,
@@ -36,6 +67,7 @@ export default function Contact() {
       setName('')
       setEmail('')
       setMessage('')
+      setFieldErrors({})
     } catch (error) {
       setFormError('Falha ao enviar o formulário. Por favor, tente novamente.')
     }
@@ -98,11 +130,13 @@ export default function Contact() {
                 <div>
                   <h3 className="font-semibold text-foreground text-sm">Endereço</h3>
                   <p className="text-sm text-muted-foreground mt-1">
+                  <a href="https://maps.app.goo.gl/6LhAKPH9HvRS5yB86" target="_blank" rel="noopener noreferrer">
                     Alameda Afonso Schmidt, 508
                     <br />
                     Santa Terezinha — São Paulo/SP
                     <br />
                     CEP 02450-001
+                    </a>
                   </p>
                 </div>
               </div>
@@ -155,54 +189,92 @@ export default function Contact() {
                       htmlFor="name"
                       className="block text-sm font-medium text-foreground mb-1.5"
                     >
-                      Nome
+                      Nome <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="w-full rounded-lg border border-input bg-white px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow"
+                      onChange={(e) => {
+                        setName(e.target.value)
+                        if (fieldErrors.name) setFieldErrors((prev) => ({ ...prev, name: undefined }))
+                      }}
+                      className={`w-full rounded-lg border bg-white px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow ${fieldErrors.name ? 'border-red-500' : 'border-input'}`}
                       placeholder="Seu nome completo"
-                      required
+                      aria-invalid={!!fieldErrors.name}
+                      aria-describedby={fieldErrors.name ? 'name-error' : undefined}
                     />
+                    {fieldErrors.name && (
+                      <p id="name-error" className="mt-1 text-sm text-red-500" role="alert">
+                        {fieldErrors.name}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label
                       htmlFor="email"
                       className="block text-sm font-medium text-foreground mb-1.5"
                     >
-                      E-mail
+                      E-mail <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full rounded-lg border border-input bg-white px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow"
+                      onChange={(e) => {
+                        setEmail(e.target.value)
+                        if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: undefined }))
+                      }}
+                      className={`w-full rounded-lg border bg-white px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow ${fieldErrors.email ? 'border-red-500' : 'border-input'}`}
                       placeholder="seu@email.com"
-                      required
+                      aria-invalid={!!fieldErrors.email}
+                      aria-describedby={fieldErrors.email ? 'email-error' : undefined}
                     />
+                    {fieldErrors.email && (
+                      <p id="email-error" className="mt-1 text-sm text-red-500" role="alert">
+                        {fieldErrors.email}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label
                       htmlFor="message"
                       className="block text-sm font-medium text-foreground mb-1.5"
                     >
-                      Mensagem
+                      Mensagem <span className="text-muted-foreground font-normal">(opcional)</span>
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       value={message}
-                      onChange={(e) => setMessage(e.target.value)}
+                      onChange={(e) => {
+                        setMessage(e.target.value)
+                        if (fieldErrors.message) setFieldErrors((prev) => ({ ...prev, message: undefined }))
+                      }}
                       rows={5}
-                      className="w-full rounded-lg border border-input bg-white px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow resize-none"
-                      placeholder="Como podemos ajudar?"
-                      required
+                      maxLength={MESSAGE_MAX_LENGTH}
+                      className={`w-full rounded-lg border bg-white px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow resize-none ${fieldErrors.message ? 'border-red-500' : 'border-input'}`}
+                      placeholder="Como podemos ajudar? Fale sobre seu projeto, sua necessidade ou o que você precisa."
+                      aria-invalid={!!fieldErrors.message}
+                      aria-describedby={fieldErrors.message ? 'message-error' : 'message-count'}
                     />
+                    <div className="mt-1 flex justify-between items-baseline">
+                      <span>
+                        {fieldErrors.message && (
+                          <span id="message-error" className="text-sm text-red-500" role="alert">
+                            {fieldErrors.message}
+                          </span>
+                        )}
+                      </span>
+                      <span
+                        id="message-count"
+                        className={`text-xs ${message.length > MESSAGE_MAX_LENGTH ? 'text-red-500' : 'text-muted-foreground'}`}
+                      >
+                        {message.length}/{MESSAGE_MAX_LENGTH}
+                      </span>
+                    </div>
                   </div>
                   <button
                     type="submit"
