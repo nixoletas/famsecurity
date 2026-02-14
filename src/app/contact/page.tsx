@@ -107,7 +107,7 @@ export default function Contact() {
               Entre em contato
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-              Estamos prontos para ouvir suas necessidades e propor a melhor solução em segurança.
+              Estamos prontos para ouvir suas necessidades e propor<br /> <span className="gradient-text">a melhor solução</span>.
             </p>
           </motion.div>
         </div>
