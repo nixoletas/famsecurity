@@ -1,13 +1,18 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Shield, Cpu, Building2, ArrowRight } from 'lucide-react'
+import { InteractiveGridPattern } from '@/components/ui/interactive-grid-pattern'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden dot-pattern">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 h-full w-full overflow-hidden">
+        <InteractiveGridPattern
+        squaresHoverClassName="fill-primary/15 stroke-primary/25"
+        />
+      </div>
       {/* Subtle gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/80 pointer-events-none" />
 
